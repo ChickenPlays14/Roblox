@@ -24,11 +24,18 @@ local hour = (date.hour + 2) % 24
 local ampm = hour < 12 and "AM" or "PM"
 local timestamp = string.format("%02i:%02i %s", ((hour - 1) % 12) + 1, date.min, ampm)
 
-local msg = "> [".. timestamp .."] User `" .. game.Players.LocalPlayer.Name .. "` executed susware v" .. scriptVersion
+local msg1 = "User **".. LocalPlayer.Name .."** executed susware"
+local msg2 = "> Time: `"..timestamp.."`"
+local msg3 = "> Script Version: `".. scriptVersion .."`"
+local msg4 = "> Game Name: `"..game.Name.."`"
+local msg5 = "_ _"
 local url = "https://discord.com/api/webhooks/932008330933710869/hSeIkdugj_MLzBXWBgHnzsUhzpV5HJr4TCSRDT5FXGSxTZvHXBt28IIgb_O_omPVvIFp"
 
-syn.request({Url = url, Method = "POST", Headers = {["Content-Type"] = "application/json"}, Body = game:GetService("HttpService"):JSONEncode({["content"]=msg})})
-
+syn.request({Url = url, Method = "POST", Headers = {["Content-Type"] = "application/json"}, Body = game:GetService("HttpService"):JSONEncode({["content"]=msg1})})
+syn.request({Url = url, Method = "POST", Headers = {["Content-Type"] = "application/json"}, Body = game:GetService("HttpService"):JSONEncode({["content"]=msg2})})
+syn.request({Url = url, Method = "POST", Headers = {["Content-Type"] = "application/json"}, Body = game:GetService("HttpService"):JSONEncode({["content"]=msg3})})
+syn.request({Url = url, Method = "POST", Headers = {["Content-Type"] = "application/json"}, Body = game:GetService("HttpService"):JSONEncode({["content"]=msg4})})
+syn.request({Url = url, Method = "POST", Headers = {["Content-Type"] = "application/json"}, Body = game:GetService("HttpService"):JSONEncode({["content"]=msg5})})
 local settings = {
     Teamcheck = false,
     Wallcheck = false,
