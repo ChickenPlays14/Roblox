@@ -9,7 +9,7 @@
     Made by cheetoah#2334
 --]]
 
-local scriptVersion = 1.5
+local scriptVersion = 1.6
 
 local CurrentCamera = workspace.CurrentCamera
 local Players = game.GetService(game, "Players")
@@ -321,7 +321,6 @@ silentfovcircle.Position = Vector2.new(CurrentCamera.ViewportSize.X / 2, Current
 silentfovcircle.Color = Color3.fromRGB(255,15,25)
 
 local function isVisSilent(p)
-    if not silentAimSettings.Wallcheck then return true end
 	ignoreList = {LocalPlayer.Character, CurrentCamera, p.Character}
 	local parts = workspace.CurrentCamera:GetPartsObscuringTarget({p.Character.Head.Position, CurrentCamera.CFrame.Position}, ignoreList)
     return #parts == 0
@@ -329,7 +328,6 @@ end
 
 function get_target_silent()
     local MaxDist, Closest = math.huge
-
     for I,V in pairs(Players.GetPlayers(Players)) do
         if not silentAimSettings.Enabled then continue end
         
