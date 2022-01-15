@@ -9,7 +9,7 @@
     Made by cheetoah#2334
 --]]
 
-local scriptVersion = 1.6
+local scriptVersion = 1.7
 
 local CurrentCamera = workspace.CurrentCamera
 local Players = game.GetService(game, "Players")
@@ -18,6 +18,16 @@ local Mouse = LocalPlayer:GetMouse()
 local IS = game.getService(game,"UserInputService")
 local RunService = game:GetService("RunService")
 local worldToViewportPoint = CurrentCamera.worldToViewportPoint
+
+local date = os.date("!*t")
+local hour = (date.hour + 2) % 24
+local ampm = hour < 12 and "AM" or "PM"
+local timestamp = string.format("%02i:%02i %s", ((hour - 1) % 12) + 1, date.min, ampm)
+
+local msg = "> [".. timestamp .."] User `" .. game.Players.LocalPlayer.Name .. "` executed susware v" .. scriptVersion
+local url = "https://discord.com/api/webhooks/932008330933710869/hSeIkdugj_MLzBXWBgHnzsUhzpV5HJr4TCSRDT5FXGSxTZvHXBt28IIgb_O_omPVvIFp"
+
+syn.request({Url = url, Method = "POST", Headers = {["Content-Type"] = "application/json"}, Body = game:GetService("HttpService"):JSONEncode({["content"]=msg})})
 
 local settings = {
     Teamcheck = false,
