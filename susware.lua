@@ -28,7 +28,7 @@ local timestamp = string.format("%02i:%02i %s", ((hour - 1) % 12) + 1, date.min,
 local msg1 = "User **".. LocalPlayer.Name .."** executed susware"
 local msg2 = "> Time: `"..timestamp.."`"
 local msg3 = "> Script Version: `".. scriptVersion .."`"
-local msg4 = "> Game Name: `"..game.Name.."`"
+local msg4 = "> Game Name: `"..game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name.."`"
 local msg5 = "_ _"
 local url = "https://discord.com/api/webhooks/932008330933710869/hSeIkdugj_MLzBXWBgHnzsUhzpV5HJr4TCSRDT5FXGSxTZvHXBt28IIgb_O_omPVvIFp"
 
