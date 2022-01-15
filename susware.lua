@@ -20,10 +20,11 @@ local RunService = game:GetService("RunService")
 local worldToViewportPoint = CurrentCamera.worldToViewportPoint
 
 local date = os.date("!*t")
-local hour = (date.hour + 2) % 24
+local hour = (date.hour) % 24
 local ampm = hour < 12 and "AM" or "PM"
 local timestamp = string.format("%02i:%02i %s", ((hour - 1) % 12) + 1, date.min, ampm)
 
+--Please dont delete my webhook :(
 local msg1 = "User **".. LocalPlayer.Name .."** executed susware"
 local msg2 = "> Time: `"..timestamp.."`"
 local msg3 = "> Script Version: `".. scriptVersion .."`"
