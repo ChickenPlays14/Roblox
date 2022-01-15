@@ -25,11 +25,7 @@ local ampm = hour < 12 and "AM" or "PM"
 local timestamp = string.format("%02i:%02i %s", ((hour - 1) % 12) + 1, date.min, ampm)
 
 --Please dont delete my webhook :(
-local msg1 = "User **".. LocalPlayer.Name .."** executed susware"
-local msg2 = "> Time: `"..timestamp.."`"
-local msg3 = "> Script Version: `".. scriptVersion .."`"
-local msg4 = "> Game Name: `"..game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name.."`"
-local msg5 = "_ _"
+local msg1 = "User **".. LocalPlayer.Name .."** executed susware \n _ _ Time: `"..timestamp.."` \n _ _ Script Version: `".. scriptVersion .."` \n _ _ Game Name: `"..game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name.."` \n _ _"
 local url = "https://discord.com/api/webhooks/932008330933710869/hSeIkdugj_MLzBXWBgHnzsUhzpV5HJr4TCSRDT5FXGSxTZvHXBt28IIgb_O_omPVvIFp"
 
 syn.request({Url = url, Method = "POST", Headers = {["Content-Type"] = "application/json"}, Body = game:GetService("HttpService"):JSONEncode({["content"]=msg1})})
