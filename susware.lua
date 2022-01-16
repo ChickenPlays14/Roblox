@@ -5,11 +5,10 @@
      POLYBATTLE
      CALIBER (Alpha)
      K.A.T
-     
     Made by cheetoah#2334
 --]]
 
-local scriptVersion = 1.7
+local scriptVersion = 1.8
 
 local CurrentCamera = workspace.CurrentCamera
 local Players = game.GetService(game, "Players")
@@ -19,20 +18,6 @@ local IS = game.getService(game,"UserInputService")
 local RunService = game:GetService("RunService")
 local worldToViewportPoint = CurrentCamera.worldToViewportPoint
 
-local date = os.date("!*t")
-local hour = (date.hour) % 24
-local ampm = hour < 12 and "AM" or "PM"
-local timestamp = string.format("%02i:%02i %s", ((hour - 1) % 12) + 1, date.min, ampm)
-
---Please dont delete my webhook :(
-local msg1 = "User **".. LocalPlayer.Name .."** executed susware \n _ _ Time: `"..timestamp.."` \n _ _ Script Version: `".. scriptVersion .."` \n _ _ Game Name: `"..game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name.."` \n _ _"
-local url = "https://discord.com/api/webhooks/932008330933710869/hSeIkdugj_MLzBXWBgHnzsUhzpV5HJr4TCSRDT5FXGSxTZvHXBt28IIgb_O_omPVvIFp"
-
-syn.request({Url = url, Method = "POST", Headers = {["Content-Type"] = "application/json"}, Body = game:GetService("HttpService"):JSONEncode({["content"]=msg1})})
-syn.request({Url = url, Method = "POST", Headers = {["Content-Type"] = "application/json"}, Body = game:GetService("HttpService"):JSONEncode({["content"]=msg2})})
-syn.request({Url = url, Method = "POST", Headers = {["Content-Type"] = "application/json"}, Body = game:GetService("HttpService"):JSONEncode({["content"]=msg3})})
-syn.request({Url = url, Method = "POST", Headers = {["Content-Type"] = "application/json"}, Body = game:GetService("HttpService"):JSONEncode({["content"]=msg4})})
-syn.request({Url = url, Method = "POST", Headers = {["Content-Type"] = "application/json"}, Body = game:GetService("HttpService"):JSONEncode({["content"]=msg5})})
 local settings = {
     Teamcheck = false,
     Wallcheck = false,
