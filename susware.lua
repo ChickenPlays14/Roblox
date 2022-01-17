@@ -125,9 +125,11 @@ local espSettings = {
     Box_Colour = Color3.fromRGB(255,15,25),
     Nametag_Colour = Color3.new(1,0.62,0),
     Healthbar_Colour = Color3.new(0.15,1,0.26),
+    Tracer_Colour = Color3.fromRGB(255,15,25),
     Nametags = false,
     Teamcheck = false,
-    Healthbar = false
+    Healthbar = false,
+    Tracer = false
 }
 
 local HeadOff = Vector3.new(0, 0.5, 0)
@@ -152,6 +154,13 @@ for i,v in pairs(game.Players:GetChildren()) do
     HealthBar.Color = Color3.new(0.15,1,0.26)
     HealthBar.Transparency = 1 
     HealthBar.Visible = false
+    
+    local Tracer = Drawing.new("Line")
+    Tracer.Thickness = 0.5 
+    Tracer.Color = Color3.fromRGB(255,15,25)
+    Tracer.Transparency = 1
+    Tracer.Visible = false
+    Tracer.From = Vector2.new(CurrentCamera.ViewportSize.X / 2, CurrentCamera.ViewportSize.Y - 10)
     
     function boxesp()
         game:GetService("RunService").RenderStepped:Connect(function()
@@ -184,6 +193,15 @@ for i,v in pairs(game.Players:GetChildren()) do
                         else
                             Nametag.Visible = false
                         end
+                        
+                        Tracer.To = Vector2.new(LegPosition.X, LegPosition.Y)
+                        if espSettings.Tracer then
+                            Tracer.Visible = true
+                            Tracer.Color = espSettings.Tracer_Colour
+                        else
+                            Tracer.Visible = false
+                        end
+                        
                         
                         HealthBar.Size = Vector2.new(2, (HeadPosition.Y - LegPosition.Y) * (v.Character.Humanoid.Health / v.Character.Humanoid.MaxHealth))
                         HealthBar.Position = Vector2.new(Box.Position.X - 5, Box.Position.Y + (1/HealthBar.Size.Y))
@@ -233,10 +251,17 @@ game.Players.PlayerAdded:Connect(function(v)
     HealthBar.Transparency = 1 
     HealthBar.Visible = false
     
+     local Tracer = Drawing.new("Line")
+    Tracer.Thickness = 0.5 
+    Tracer.Color = Color3.fromRGB(255,15,25)
+    Tracer.Transparency = 1
+    Tracer.Visible = false
+    Tracer.From = Vector2.new(CurrentCamera.ViewportSize.X / 2, CurrentCamera.ViewportSize.Y - 10)
+    
     function boxesp()
         game:GetService("RunService").RenderStepped:Connect(function()
             if v.Character ~= nil and v.Character:FindFirstChild("Humanoid") ~= nil and v.Character:FindFirstChild("HumanoidRootPart") ~= nil and v ~= LocalPlayer and v.Character.Humanoid.Health > 0 and v.Character:FindFirstChild("Head") ~= nil then
-                if espSettings.Teamcheck and LocalPlayer.TeamColor ~= v.TeamColor or not espSettings.Teamcheck then
+                 if espSettings.Teamcheck and LocalPlayer.TeamColor ~= v.TeamColor or not espSettings.Teamcheck then
                     local Vector, onScreen = CurrentCamera:worldToViewportPoint(v.Character.HumanoidRootPart.Position)
         
                     local RootPart = v.Character.HumanoidRootPart
@@ -264,6 +289,15 @@ game.Players.PlayerAdded:Connect(function(v)
                         else
                             Nametag.Visible = false
                         end
+                        
+                        Tracer.To = Vector2.new(LegPosition.X, LegPosition.Y)
+                        if espSettings.Tracer then
+                            Tracer.Visible = true
+                            Tracer.Color = espSettings.Tracer_Colour
+                        else
+                            Tracer.Visible = false
+                        end
+                        
                         
                         HealthBar.Size = Vector2.new(2, (HeadPosition.Y - LegPosition.Y) * (v.Character.Humanoid.Health / v.Character.Humanoid.MaxHealth))
                         HealthBar.Position = Vector2.new(Box.Position.X - 5, Box.Position.Y + (1/HealthBar.Size.Y))
@@ -525,6 +559,18 @@ end)
 
 EspSection:NewColorPicker("Nametag Colour", "What colour the nametags are...", Color3.new(1,0.62,0), function(color)
     espSettings.Nametag_Colour = color
+end)
+
+EspSection:NewToggle("Tracer", "Draw a line to the player", function(state)
+    if state then
+        espSettings.Tracer = true
+    else
+        espSettings.Tracer = false
+    end
+end)
+
+EspSection:NewColorPicker("Tracer Colour", "What colour the tracers are...", Color3.fromRGB(255,15,25), function(color)
+    espSettings.Tracer_Colour = color
 end)
 
 EspSection:NewToggle("Health Bar", "Draw a health bar next to the players", function(state)
