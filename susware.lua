@@ -8,7 +8,7 @@
     Made by cheetoah#2334
 --]]
 
-local scriptVersion = 1.8
+local scriptVersion = 1.9
 
 local CurrentCamera = workspace.CurrentCamera
 local Players = game.GetService(game, "Players")
